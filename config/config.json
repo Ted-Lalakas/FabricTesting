@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "fabric-testing-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fabricTesting/FabricTestingWebPart.js",
+          "manifest": "./src/webparts/fabricTesting/FabricTestingWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FabricTestingWebPartStrings": "lib/webparts/fabricTesting/loc/{locale}.js"
+  }
+}
