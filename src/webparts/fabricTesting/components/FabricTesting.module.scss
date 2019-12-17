@@ -49,6 +49,13 @@
     pointer-events: none;
   }
 
+  .inputTextHeader {
+    // don't do this in actual project. (JUST FOR TESTING) 
+    // use microsofts styling to create this effect. 
+    position: absolute;
+    right: 0;
+  }
+
   .button {
     // Our button
     text-decoration: none;

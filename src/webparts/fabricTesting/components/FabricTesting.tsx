@@ -9,6 +9,8 @@ import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { QuestionSelection } from '../components/QuestionSelection/QuestionSelection';
 import { DefaultButton, Stack } from 'office-ui-fabric-react';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import InputNested from './TextField/InputNested';
 
 export default class FabricTesting extends React.Component<any, any, any> {
   constructor(props) {
@@ -31,7 +33,9 @@ export default class FabricTesting extends React.Component<any, any, any> {
         { name: "Q2" },
         { name: "Q3" }
       ],
-      questionSelectedKey: ""
+      questionSelectedKey: "",
+      inputValue: "",
+      inputValue2: ""
     };
   }
 
@@ -52,6 +56,16 @@ export default class FabricTesting extends React.Component<any, any, any> {
     console.log("ROOT Choice Group Value: ",valuePassed);
   }
 
+  public changeInputHander = (event) => {
+    this.setState({ inputValue: event.target.value });
+  }
+
+  public changeNestedInputHander = (event) => {
+    this.setState({ inputValue2: event.target.value });
+  }
+
+
+
   public assignedClasses = [styles.button, styles.isDisabled];
 
   // Example formatting
@@ -65,6 +79,9 @@ export default class FabricTesting extends React.Component<any, any, any> {
         <div className={ styles.container }>
           <div style={{ backgroundColor: SharedColors.green20 }} className={ styles.row }>
             <div className={ styles.column }>
+              <span className={ styles.title }>Welcome to SharePoint!</span>
+              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
+              <p className={ styles.description }>{escape(this.props.description)}</p>
               <SearchBox 
                 placeholder="Search"
                 onSearch={newValue => console.log('value is ' + newValue)}
@@ -72,9 +89,6 @@ export default class FabricTesting extends React.Component<any, any, any> {
                 onBlur={() => console.log('onBlur called')}
                 onChange={() => console.log('onChange called')}
               />
-              <span className={ styles.title }>Welcome to SharePoint!</span>
-              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
             </div>
           </div>
         </div>
@@ -143,11 +157,41 @@ export default class FabricTesting extends React.Component<any, any, any> {
                   disabled={!this.state.isDisabled}  
                 />
               </Stack>
+              </div>
+          </div>
+        </div>
+
+        <div className={ styles.container }>
+          <div style={{ backgroundColor: SharedColors.blue10 }} className={ styles.row }>
+            <div className={ styles.column }>
+              <Stack tokens={{ childrenGap: 15 }}>
+                <TextField
+                  label="Basic controlled TextField"
+                  value={this.state.inputValue}
+                  onChange={this.changeInputHander}
+                  styles={{ fieldGroup: { width: 300 } }}
+                />
+                <h3 className={styles.inputTextHeader}>{this.state.inputValue}</h3>
+              </Stack>
             </div>
           </div>
         </div>
 
-      </div>
+        <div className={ styles.container }>
+          <div style={{ backgroundColor: SharedColors.yellowGreen10 }} className={ styles.row }>
+            <div className={ styles.column }>
+              <Stack tokens={{ childrenGap: 15 }}>
+                <InputNested nestedValue={this.state.inputValue2} changeHandler={this.changeNestedInputHander}  />
+                <h3 className={styles.inputTextHeader}>{this.state.inputValue2}</h3>
+              </Stack>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div> //fabricTesting DIV END
     );
   }
 }
