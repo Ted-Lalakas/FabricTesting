@@ -16,9 +16,6 @@ export default class FabricTesting extends React.Component<any, any, any> {
   constructor(props) {
     super(props);
 
-    // this._onChange = this._onChange.bind(this);
-    // this._alertClicked = this._alertClicked.bind(this);
-
     this.state = {
       buttonPressed: false,
       buttonClicked: false,
