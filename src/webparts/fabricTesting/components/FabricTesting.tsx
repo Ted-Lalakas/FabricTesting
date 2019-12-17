@@ -1,5 +1,7 @@
 import * as React from 'react';
 import styles from './FabricTesting.module.scss';
+import { SharedColors  } from '@uifabric/fluent-theme';
+
 import { IFabricTestingProps } from './IFabricTestingProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { ButtonMain } from './ButtonMain/ButtonMain';
@@ -59,9 +61,9 @@ export default class FabricTesting extends React.Component<any, any, any> {
   public render(): React.ReactElement<IFabricTestingProps> {
     return (
       <div className={ styles.fabricTesting }>
-        <div className={ styles.container }>
 
-          <div className={ styles.row }>
+        <div className={ styles.container }>
+          <div style={{ backgroundColor: SharedColors.green20 }} className={ styles.row }>
             <div className={ styles.column }>
               <SearchBox 
                 placeholder="Search"
@@ -75,42 +77,46 @@ export default class FabricTesting extends React.Component<any, any, any> {
               <p className={ styles.description }>{escape(this.props.description)}</p>
             </div>
           </div>
+        </div>
 
-          <div className={ styles.row }>
+        <div className={ styles.container }>
+          <div style={{ backgroundColor: SharedColors.blueMagenta20 }} className={ styles.row }>
             <div className={ styles.column }>
-            <h2>Slider Value: { this.state.sliderValue }</h2>
-            <Slider
-              className={styles.slider}
-              label="Slider example: when > 50 will Disable"
-              min={0}
-              max={100}
-              step={10}
-              disabled={this.state.sliderDisabled}
-              defaultValue={this.state.sliderValue}
-              showValue={true}
-              onChange={(value: number) => {
-                  console.log("REFRESHED"); 
-                  this.setState({ sliderValue: value });
+              <h2>Slider Value: { this.state.sliderValue }</h2>
+              <Slider
+                className={styles.slider}
+                label="Slider example: when > 50 will Disable"
+                min={0}
+                max={100}
+                step={10}
+                disabled={this.state.sliderDisabled}
+                defaultValue={this.state.sliderValue}
+                showValue={true}
+                onChange={(value: number) => {
+                    console.log("REFRESHED"); 
+                    this.setState({ sliderValue: value });
 
-                  if(value < 50) {
-                    this.setState({ sliderDisabled: false });
-                    this.assignedClasses = [styles.button, styles.isDisabled];
-                  }
+                    if(value < 50) {
+                      this.setState({ sliderDisabled: false });
+                      this.assignedClasses = [styles.button, styles.isDisabled];
+                    }
 
-                  if(value >= 50) {
-                    this.setState({ sliderDisabled: true });
-                    this.assignedClasses = [styles.button];
+                    if(value >= 50) {
+                      this.setState({ sliderDisabled: true });
+                      this.assignedClasses = [styles.button];
+                    }
                   }
                 }
-              }
-            />
-            <a className={this.assignedClasses.join(' ')} onClick={ () => this.setState({ sliderDisabled: false }) }>
-              <span className={ styles.label }>Enable the Slider</span>
-            </a>
+              />
+              <a className={this.assignedClasses.join(' ')} onClick={ () => this.setState({ sliderDisabled: false }) }>
+                <span className={ styles.label }>Enable the Slider</span>
+              </a>
             </div>
           </div>
+        </div>
 
-          <div className={ styles.row }>
+        <div className={ styles.container }>
+          <div style={{ backgroundColor: SharedColors.red20 }} className={ styles.row }>
             <div className={ styles.column }>
               <QuestionSelection 
                 questionsAll={this.state.questionsAll} 
@@ -118,8 +124,10 @@ export default class FabricTesting extends React.Component<any, any, any> {
                 />
             </div>
           </div>
+        </div>
           
-          <div className={ styles.row }>
+        <div className={ styles.container }>
+          <div style={{ backgroundColor: SharedColors.gray20 }} className={ styles.row }>
             <div className={ styles.column }>
               <Stack horizontal tokens={this.stackTokens}>
                 <ButtonMain 
@@ -135,12 +143,11 @@ export default class FabricTesting extends React.Component<any, any, any> {
                   disabled={!this.state.isDisabled}  
                 />
               </Stack>
-
+            </div>
           </div>
-
         </div>
+
       </div>
-    </div>
     );
   }
 }
